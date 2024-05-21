@@ -1,15 +1,24 @@
 class Restaurante:
-def__init__(self,nome.categoria):
-    self,nome = nome
-    self,categoria = categoria
-    self,ativo = False
+    restaurantes = []
 
-def__str__(self):
-    return self.nome
+    def __init__(self,nome,categoria):
+        self.nome = nome.title()  #.title() deixa a primeira letra maiuscula
+        self.categoria = categoria.upper()
+        self._ativo = False
+        Restaurante.restaurantes.append(self)
 
-restaurante_praca = Restaurante('praça','Gourmet')
-restaurante_pizza = Restaurante('pizza', 'Italiana')
+    def __str__(self):
+        return f'{self.nome} | {self.categoria}'
 
-restaurantes = [restaurante_pizza.restaurante_praca]
+    @classmethod
+    def listar_restaurantes(cls):
+        print(f'{"Nome do restaurante".ljust(25)}  |  {"Categoria".ljust(25)}  |  {"Status".ljust(25)}')
+        for restaurante in Restaurante.restaurantes:
+            print(f'{restaurante.nome.ljust(25)}  |  {restaurante.categoria.ljust(25)}  |  {restaurante.ativo}')
 
-print(restaurante_praca)
+    @property
+    def ativo(self):
+        return '⌧' if self._ativo else '☐'
+
+    def alternar_restaurantes(self):
+        self._ativo = not self._ativo
